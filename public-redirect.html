@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting to GamingYoti...</title>
+    <meta charset="utf-8">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            max-width: 500px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-icon {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+        .redirect-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        .redirect-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h2>Verification Complete!</h2>
+        <div class="spinner"></div>
+        <p>Redirecting you back to GamingYoti...</p>
+        <p><small>If you are not redirected automatically, <a href="#" id="manual-link" class="redirect-link">click here</a></small></p>
+    </div>
+
+    <script>
+        // Get sessionId from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('sessionId');
+        
+        if (sessionId) {
+            // Redirect to your local result page with the sessionId
+            const resultUrl = `http://localhost:3000/result?sessionId=${sessionId}`;
+            
+            // Update the manual link
+            document.getElementById('manual-link').href = resultUrl;
+            
+            // Auto-redirect after 3 seconds
+            setTimeout(() => {
+                window.location.href = resultUrl;
+            }, 3000);
+        } else {
+            // No sessionId found, redirect to home
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3000/';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

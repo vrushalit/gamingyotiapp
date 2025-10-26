@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting to Result...</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>✅ Verification Complete!</h2>
+        <div class="spinner"></div>
+        <p>Redirecting to your result page...</p>
+        <p><small>If you are not redirected automatically, <a href="#" id="manual-link">click here</a></p>
+    </div>
+
+    <script>
+        // Get sessionId from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('sessionId');
+        
+        if (sessionId) {
+            // Redirect to your local result page with the sessionId
+            const resultUrl = `http://localhost:3000/result?sessionId=${sessionId}`;
+            
+            // Update the manual link
+            document.getElementById('manual-link').href = resultUrl;
+            
+            // Auto-redirect after 2 seconds
+            setTimeout(() => {
+                window.location.href = resultUrl;
+            }, 2000);
+        } else {
+            // No sessionId found, redirect to home
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3000/';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
