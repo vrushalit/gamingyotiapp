@@ -21,8 +21,7 @@
 
 ### Required Accounts:
 - **Yoti Developer Account** (for API credentials)
-- **ngrok Account** (free tier available)
-
+  
 ---
 
 ## 📁 Project Structure
